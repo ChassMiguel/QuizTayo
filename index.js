@@ -46,13 +46,17 @@ app.post('/webhook', async (req, res) => {
 
 // Send a message back to the user
 async function sendMessage(recipientId, text) {
-  await axios.post(
-    `https://graph.facebook.com/v25.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
-    {
-      recipient: { id: recipientId },
-      message: { text }
-    }
-  );
+  try {
+    await axios.post(
+      `https://graph.facebook.com/v25.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+      {
+        recipient: { id: recipientId },
+        message: { text }
+      }
+    );
+  } catch (error) {
+    console.error('Send error:', JSON.stringify(error.response?.data));
+  }
 }
 
 app.listen(3000, () => console.log('Server running on port 3000'));
