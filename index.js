@@ -47,7 +47,7 @@ app.post('/webhook', async (req, res) => {
 // Send a message back to the user
 async function sendMessage(recipientId, text) {
   await axios.post(
-    `https://graph.facebook.com/v19.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+    `https://graph.facebook.com/v25.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
     {
       recipient: { id: recipientId },
       message: { text }
