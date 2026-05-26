@@ -24,6 +24,7 @@ app.get('/webhook', (req, res) => {
 // Receive messages
 app.post('/webhook', async (req, res) => {
   const body = req.body;
+  console.log('Full body:', JSON.stringify(body)); // add this
 
   if (body.object === 'page') {
     for (const entry of body.entry) {
@@ -33,8 +34,6 @@ app.post('/webhook', async (req, res) => {
       if (event.message?.text) {
         const userMessage = event.message.text;
         console.log(`Message from ${senderId}: ${userMessage}`);
-
-        // For now, echo back — we'll replace this with RAG later
         await sendMessage(senderId, `You said: ${userMessage}`);
       }
     }
